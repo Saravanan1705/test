@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: scl
+    app.kubernetes.io/component: scl
+    app.kubernetes.io/instance: scl
+    app.kubernetes.io/name: scl
+  name: scl
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: scl
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+      creationTimestamp: null
+      labels:
+        app: scl
+        deploymentconfig: scl
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/test/scl@sha256:cbf6d641c3b5a60197ef7484e8ebfac7d417add4967184cb3333810f4ef7ff54
+        imagePullPolicy: IfNotPresent
+        name: scl
+        ports:
+        - containerPort: 8083
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: scl
+      serviceAccountName: scl
+      terminationGracePeriodSeconds: 30
