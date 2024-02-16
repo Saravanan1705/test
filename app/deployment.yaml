@@ -30,7 +30,7 @@ spec:
         deploymentconfig: scl
     spec:
       containers:
-      - image: image-registry.openshift-image-registry.svc:5000/test/scl@sha256:cbf6d641c3b5a60197ef7484e8ebfac7d417add4967184cb3333810f4ef7ff54
+      - image: docker.io/saravana1705/scl:v1
         imagePullPolicy: IfNotPresent
         name: scl
         ports:
