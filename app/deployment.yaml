@@ -30,7 +30,7 @@ spec:
         deploymentconfig: scl
     spec:
       containers:
-      - image: docker.io/saravana1705/scl:v1
+      - image: docker.io/saravana1705/scl:v2
         imagePullPolicy: IfNotPresent
         name: scl
         ports:
