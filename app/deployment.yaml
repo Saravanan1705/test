@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/name: scl
   name: scl
 spec:
-  progressDeadlineSeconds: 600
+  progressDeadlineSeconds: 6000
   replicas: 1
   revisionHistoryLimit: 10
   selector:
