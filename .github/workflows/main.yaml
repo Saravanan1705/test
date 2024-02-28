@@ -3,7 +3,7 @@ on: push
 
 jobs:
   hello:
-     run-ons: ubuntu-latest
+     run-on: ubuntu-latest
      
      steps:
        - name: hello
