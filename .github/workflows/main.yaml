@@ -1,26 +1,11 @@
-name: Jira Integration
-
-on:
-  push:name: Jira Integration
-
-on:
-  push:
-    branches:
-      - main
+name: Hello
+on: push
 
 jobs:
-  notify-jira:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Notify Jira
-        env:
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-          JIRA_BASE_URL: 'https://prodevans-saravanann.atlassian.net/jira/your-work'
-        run: |
-          # Use Jira API to create a request or update an existing one
-          # Example: curl -X POST -H "Authorization: Basic $(echo -n username:$JIRA_API_TOKEN | base64)" -H "Content-Type: application/json" -d '{"key": "PROJECT-123", "transition": {"id": "your-transition-id"}}' $JIRA_BASE_URL/rest/api/2/issue/PROJECT-123/transitions
-
+  hello:
+     run-ons: ubuntu-latest
+     
+     steps:
+       - name: hello
+         run: echo "hello"
+        
