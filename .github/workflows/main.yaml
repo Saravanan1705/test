@@ -7,7 +7,7 @@ on:
       - synchronize
 
 jobs:
-  update-jira-issue:
+  create-jira-issue:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,15 +20,27 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Build and Tests
+      - name: Build and Test
         run: |
           ./gradlew build
 
-      - name: Update Jira Issue
+      - name: Create Jira Issue
         env:
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          JIRA_BASE_URL: 'https://prodevans-saravanann.atlassian.net'
         run: |
-          ISSUE_KEY=${{ steps.extract_issue_key.outputs.key }}
-          curl -u $JIRA_USERNAME:$JIRA_API_TOKEN -X PUT -H "Content-Type: application/json" -d '{"fields":{"summary":"Updated Summary"}}' https://prodevans-saravanann.atlassian.net/rest/api/2/issue/$ISSUE_KEY
-
+          # Example: Create a Jira issue
+          curl -u $JIRA_USERNAME:$JIRA_API_TOKEN -X POST -H "Content-Type: application/json" \
+            --data '{
+              "fields": {
+                "project": {
+                  "key": "KAN"
+                },
+                "summary": "YOUR_SUMMARY",
+                "issuetype": {
+                  "name": "Task"
+                }
+              }
+            }' \
+            $JIRA_BASE_URL/rest/api/2/issue/
