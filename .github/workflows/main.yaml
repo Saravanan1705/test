@@ -30,7 +30,6 @@ jobs:
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
           JIRA_BASE_URL: 'https://prodevans-saravanann.atlassian.net'
         run: |
-          # Example: Create a Jira issue
           curl -u $JIRA_USERNAME:$JIRA_API_TOKEN -X POST -H "Content-Type: application/json" \
             --data '{
               "fields": {
