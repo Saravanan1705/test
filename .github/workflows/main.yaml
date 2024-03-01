@@ -1,45 +1,36 @@
-name: Jira Integration
+name: Create Jira Issue
 
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
+  push:
+    branches:
+      - main 
 
 jobs:
   create-jira-issue:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: '11'
-
-      - name: Build and Test
-        run: |
-          ./gradlew build
 
       - name: Create Jira Issue
         env:
-          JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-          JIRA_BASE_URL: 'https://prodevans-saravanann.atlassian.net'
+          JIRA_BASE_URL: https://prodevans-saravanann.atlassian.net
         run: |
-          curl -u $JIRA_USERNAME:$JIRA_API_TOKEN -X POST -H "Content-Type: application/json" \
-            --data '{
+          curl -X POST \
+            -H "Authorization: Basic c2FyYXZhbmFuLm5AcHJvZGV2YW5zLmNvbTpBVEFUVDN4RmZHRjBXZUpSakltb0tfY1phSy15M1Z5NDBkNXFGTEZuZjNwcjVJX29KcGV0X3o3Z3ZJSnpPS29HWUhaeE5ab0ZVZUtqbXJTcHNYLUlxWnBCTFRYcFVCSVVaZHhrbkhWQTNzZ0FDem1jejhtRUhfXzMxVXl4MkVMNnA1UFV4YWh2blpVUjJTQmp3aV9vdC1VemluOEplMnNBbG56MFQ2WmlyS216aTBRX25jdndFVWc9OTFFQUI2MDg=" \
+            -H "Content-Type: application/json" \
+            -d '{
               "fields": {
                 "project": {
                   "key": "KAN"
                 },
-                "summary": "YOUR_SUMMARY",
+                "summary": "Issue ",
+                "description": "Detailed description of your issue",
                 "issuetype": {
                   "name": "Task"
                 }
               }
             }' \
-            $JIRA_BASE_URL/rest/api/2/issue/
+            "https://prodevans-saravanann.atlassian.net/rest/api/2/issue/"
