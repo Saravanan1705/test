@@ -20,15 +20,15 @@ spec:
         app: httpd
     spec:
       containers:
-      - image: quay.apps.cluster-bvn5v.bvn5v.sandbox1979.opentlc.com/demo/demo-repo:v1
-        imagePullPolicy: IfNotPresent
+      - image: https://quay.apps.cluster-j2ftm.j2ftm.sandbox1550.opentlc.com/
+        imagePullPolicy: Always
         name: httpd
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       imagePullSecrets:
-      - name: quay-registry-secret
+      - name: test-httpd
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
