@@ -20,7 +20,7 @@ spec:
         app: httpd
     spec:
       containers:
-      - image: https://quay.apps.cluster-j2ftm.j2ftm.sandbox1550.opentlc.com/
+      - image: quay.apps.cluster-j2ftm.j2ftm.sandbox1550.opentlc.com/demo/demo-repo:httpd
         imagePullPolicy: Always
         name: httpd
         resources: {}
